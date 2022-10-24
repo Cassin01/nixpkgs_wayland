@@ -17,9 +17,6 @@
         '')
         hunspell
         sqlite
-        deno
-        nodejs
-        git
         aspell
         bc
         coreutils
@@ -30,6 +27,7 @@
         jq
         nox
         silver-searcher
+        neovim
       ];
       pathsToLink = [ "/share/man" "/share/doc" "/bin" "/etc" ]; # only link the paths listed which gets rid of the extra stuff in the profile
       extraOutputsToInstall = [ "man" "doc" ]; # getting documentation
