@@ -1,6 +1,7 @@
 nixpkgs
 
-## Note
+## Note about the specific file
+## `configuration.nix`
 `configuration.nix` <- `--assume-unchanged`
 - unlock: `git update-index --no-asuume-unchanged`
 - lock: `git update-index --asuume-unchanged`
