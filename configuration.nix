@@ -43,10 +43,27 @@ in
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Enable window manager!
+  services.xserver.windowManager.xmonad.enable = true;
+
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
+
+    # The xmonad setting
+    windowManager = {
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        extraPackages = haskellPackages: [
+          haskellPackages.dbus
+          haskellPackages.List
+          haskellPackages.monad-logger
+          haskellPackages.xmonad
+        ];
+      };
+    };
   };
 
   # Enable CUPS to print documents.
@@ -102,6 +119,11 @@ in
      nodejs
      git
      helix
+
+     # for xmonad
+     xterm
+     gmrun
+     dmenu
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -138,7 +160,13 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # home-manager.users.hie = { pkgs, ... }: {
-  #   home.packages = [ pkgs.htop ];
-  # };
+  home-manager.users.hie = { pkgs, ... }: {
+    home.packages = [ 
+      haskellPackages.haskell-language-server
+      haskellPackages.hoogle
+      haskellPackages.xmonad-contrib
+      cabal-install
+      stack
+    ];
+  };
 }
