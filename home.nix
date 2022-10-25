@@ -3,11 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "hie";
-  home.homeDirectory = "/home/hie";
-
-  # Packages that should be installed to the user profile.
-  # home.packages = [ ];
+  home.username = "hix";
+  home.homeDirectory = "/home/hix";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -22,18 +19,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # neovim
-  programs.neovim = {
-      enable = true;
-      extraConfig = ''
-        "set runtimepath+=${./nvim_conf}
-        let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'
-      '';
-      # plugins = [
-      #     {
-      #         plugin = pkgs.vimPlugins.sqlite-lua;
-      #         config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
-      #     }
-      # ];
+  home.packages = [
+      pkgs.bash
+  ];
+
+  programs.bash.shellAliases = {
+      nixpkgs = "cd ~/.config/nixpkgs";
   };
 }
