@@ -30,7 +30,6 @@
         sqlite
         ripgrep
         tree-sitter
-        ripgrep
         neovim
         # }}}
       ];

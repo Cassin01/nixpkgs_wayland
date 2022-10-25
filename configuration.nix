@@ -3,12 +3,16 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+#   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-22.05.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # <home-manager/nixos>
+      (import "${home-manager}/nixos")
     ];
 
   # Bootloader.
@@ -97,6 +101,7 @@
      deno
      nodejs
      git
+     helix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
