@@ -105,6 +105,13 @@
   #   enableSSHSupport = true;
   # };
 
+  # Fonts
+  fonts.fonts = with pkgs; [
+    fira-code
+    fira-code-symbols
+     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  ];
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -123,5 +130,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

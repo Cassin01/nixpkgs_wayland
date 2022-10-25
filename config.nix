@@ -16,7 +16,6 @@
           cp ${myProfile} $out/etc/profile.d/my-profile.sh
         '')
         hunspell
-        sqlite
         aspell
         bc
         coreutils
@@ -27,7 +26,13 @@
         jq
         nox
         silver-searcher
+        # neovim {{{
+        sqlite
+        ripgrep
+        tree-sitter
+        ripgrep
         neovim
+        # }}}
       ];
       pathsToLink = [ "/share/man" "/share/doc" "/bin" "/etc" ]; # only link the paths listed which gets rid of the extra stuff in the profile
       extraOutputsToInstall = [ "man" "doc" ]; # getting documentation
