@@ -103,6 +103,7 @@ in
       kate
     #  thunderbird
     ];
+    shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.
@@ -176,18 +177,31 @@ in
   system.stateVersion = "22.05"; # Did you read the comment?
 
   home-manager.users.hix = { config, pkgs, ... }: {
-    home.packages = [ 
-    	pkgs.zsh
+    programs.home-manager.enable = true;
+    home.username = "hix"; 
+    home.homeDirectory = "/home/hix";
+
+    home.packages = [
+      pkgs.zsh
     ];
+
     programs.zsh = {
       enable = true;
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
+        config = "sudo -e /etc/nixos/configuration.nix";
       };
       history = {
         size = 10000;
         path = "${config.xdg.dataHome}/zsh/history";
+      };
+      zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; }
+          { name = "romkatv/powerlevel10k"; }
+        ];
       };
     };
   };

@@ -29,9 +29,9 @@
     shellAliases = {
       nixpkgs = "cd ~/.config/nixpkgs";
     };
-    initExtra = ''
-      # https://unix.stackexchange.com/questions/596887/how-to-scale-the-resolution-display-of-the-desktop-and-or-applications
-    '';
+    # initExtra = ''
+    #   # https://unix.stackexchange.com/questions/596887/how-to-scale-the-resolution-display-of-the-desktop-and-or-applications
+    # '';
   };
 
   # programs.zsh = {

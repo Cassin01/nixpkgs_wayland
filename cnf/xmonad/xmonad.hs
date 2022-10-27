@@ -70,6 +70,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
+    -- reload xmobar!
+    , ((modm .|. shiftMask, xK_z     ), spawn "xscreensaver-command -l")
+
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
@@ -255,7 +258,7 @@ myStartupHook = do -- return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 /home/hix/.config/xmobar/xmobarrc"
+    xmproc <- spawnPipe "xmobar -x 0 /home/hix/.config/xmobar/xmobarrc.hs"
     xmonad $ docks defaults
 
 -- A structure containing your configuration settings, overriding
