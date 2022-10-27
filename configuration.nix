@@ -36,12 +36,15 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "ja_JP.utf8";
 
+  # Set Input Method!
+  i18n.inputMethod.enabled = "fcitx5";
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = false;
+  services.xserver.desktopManager.plasma5.enable = false;
 
   # Configure keymap in X11
   services.xserver = {
