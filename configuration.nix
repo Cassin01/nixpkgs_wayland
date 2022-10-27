@@ -175,9 +175,20 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-  # home-manager.users.hie = { pkgs, ... }: {
-  #   home.packages = [ 
-  #   	pkgs.htop
-  #   ];
-  # };
+  home-manager.users.hix = { config, pkgs, ... }: {
+    home.packages = [ 
+    	pkgs.zsh
+    ];
+    programs.zsh = {
+      enable = true;
+      shellAliases = {
+        ll = "ls -l";
+        update = "sudo nixos-rebuild switch";
+      };
+      history = {
+        size = 10000;
+        path = "${config.xdg.dataHome}/zsh/history";
+      };
+    };
+  };
 }

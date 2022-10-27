@@ -21,9 +21,36 @@
 
   home.packages = [
       pkgs.bash
+      # pkgs.zsh
   ];
 
-  programs.bash.shellAliases = {
+  programs.bash = {
+    enable = true;
+    shellAliases = {
       nixpkgs = "cd ~/.config/nixpkgs";
+    };
+    initExtra = ''
+      # https://unix.stackexchange.com/questions/596887/how-to-scale-the-resolution-display-of-the-desktop-and-or-applications
+    '';
   };
+
+  # programs.zsh = {
+  #   enable = true;
+  #   shellAliases = {
+  #     ll = "ls -l";
+  #     update = "sudo nixos-rebuild switch";
+  #   };
+  #   history = {
+  #     size = 10000;
+  #     path = "${config.xdg.dataHome}/zsh/history";
+  #   };
+
+  #   zplug = {
+  #     enable = true;
+  #     plugins = [
+  #       { name = "zsh-users/zsh-autosuggestions"; }
+  #       { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
+  #     ];
+  #   };
+  # };
 }
