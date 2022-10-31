@@ -178,7 +178,7 @@ in
 
   home-manager.users.hix = { config, pkgs, ... }: {
     programs.home-manager.enable = true;
-    home.username = "hix"; 
+    home.username = "hix";
     home.homeDirectory = "/home/hix";
 
     home.packages = [
@@ -187,11 +187,18 @@ in
 
     programs.zsh = {
       enable = true;
+      autocd = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         config = "sudo -e /etc/nixos/configuration.nix";
       };
+      initExtra = ''
+        bindkey -e
+      '';
       history = {
         size = 10000;
         path = "${config.xdg.dataHome}/zsh/history";
