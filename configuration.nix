@@ -37,7 +37,10 @@ in
   i18n.defaultLocale = "ja_JP.utf8";
 
   # Set Input Method!
-  i18n.inputMethod.enabled = "fcitx5";
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -130,6 +133,12 @@ in
      gmrun
      dmenu
      wezterm
+
+     # File manager
+     xfce.thunar
+
+     #PDF reader
+     okular
 
      # A minimalistic Text Based Status Bar
      haskellPackages.xmobar
