@@ -182,6 +182,7 @@ in
 
      # For sway
      alacritty # gpu accelerated terminal
+     kitty
      sway
      dbus-sway-environment
      configure-gtk
@@ -303,10 +304,23 @@ in
     home.username = "hix";
     home.homeDirectory = "/home/hix";
 
-    home.packages = [
-      pkgs.zsh
+    home.packages = with pkgs; [
+      zsh
+      sway
     ];
 
+    wayland.windowManager.sway = {
+      enable = true;
+      config = rec {
+        modifier = "Mod1";
+          # Use kitty as default terminal
+          terminal = "kitty";
+          startup = [
+            # Launch Firefox on start
+            {command = "firefox";}
+          ];
+        };
+      };
     programs.zsh = {
       enable = true;
       autocd = true;
