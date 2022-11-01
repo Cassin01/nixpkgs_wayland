@@ -321,8 +321,9 @@ in
           ];
       };
       extraConfig = ''
+        # For mac laptop
         output Virtual-1 {
-          res 2560x1600
+          res 2880x1800
           pos 0 0
           scale 3.0
         }
