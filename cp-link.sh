@@ -6,4 +6,4 @@ set -e -o pipefail
 
 
 cp /etc/nixos/configuration.nix ~/.config/nixpkgs/
-cp -r ~/.config/sway ~/.config/nixpkgs/cnf/
+# cp -r ~/.config/sway ~/.config/nixpkgs/cnf/
