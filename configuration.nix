@@ -11,7 +11,7 @@ let
   # propagate them to relevent services run at the end of sway config
   # see
   # https://github.com/emersion/xdg-desktop-portal-wlr/wiki/"It-doesn't-work"-Troubleshooting-Checklist
-  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts  
+  # note: this is pretty much the same as  /etc/sway/config.d/nixos.conf but also restarts
   # some user services to make sure they have the correct environment variables
   dbus-sway-environment = pkgs.writeTextFile {
     name = "dbus-sway-environment";
@@ -319,8 +319,14 @@ in
             # Launch Firefox on start
             {command = "firefox";}
           ];
-        };
       };
+      extraConfig = ''
+        output Virtual-1 {
+          mode 1920x1080@59.885Hz
+          pos 0 0
+        }
+      '';
+    };
     programs.zsh = {
       enable = true;
       autocd = true;
@@ -331,12 +337,18 @@ in
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         config = "sudo -e /etc/nixos/configuration.nix";
+        nixpkgs = "cd ~/.config/nixpkgs";
       };
       initExtra = ''
         bindkey -e
         export XMODIFIERS=@im=fcitx
         export GTK_IM_MODULE=fcitx
         export QT_IM_MODULE=fcitx
+
+        # Start-up sway automaticaly
+        if [ -z $DISPLAY ] && [ "$(tty)" == "/dev/tty1" ]; then
+          exec sway
+        fi
       '';
       history = {
         size = 10000;
