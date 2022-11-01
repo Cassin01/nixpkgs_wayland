@@ -322,8 +322,9 @@ in
       };
       extraConfig = ''
         output Virtual-1 {
-          mode 1920x1080@59.885Hz
+          res 2560x1600
           pos 0 0
+          scale 3.0
         }
       '';
     };
@@ -346,9 +347,7 @@ in
         export QT_IM_MODULE=fcitx
 
         # Start-up sway automaticaly
-        if [ -z $DISPLAY ] && [ "$(tty)" == "/dev/tty1" ]; then
-          exec sway
-        fi
+        [ "$(tty)" = "/dev/tty1" ] && exec sway
       '';
       history = {
         size = 10000;
