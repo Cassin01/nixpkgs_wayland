@@ -38,7 +38,12 @@ in
 
   # Set Input Method!
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    # enabled = "fcitx5";
+    # fcitx5.addons = with pkgs; [
+    #   fcitx5-mozc
+    #   fcitx5-chinese-addons
+    # ];
+    enabled = "fcitx";
     fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
 
@@ -46,8 +51,8 @@ in
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = false;
-  services.xserver.desktopManager.plasma5.enable = false;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -60,7 +65,7 @@ in
         enable = true;
         enableContribAndExtras = true;
         extraPackages = haskellPackages: [
-          haskellPackages.dbus
+          # haskellPackages.dbus
           haskellPackages.List
           haskellPackages.monad-logger
           haskellPackages.xmonad
@@ -134,6 +139,12 @@ in
      dmenu
      wezterm
 
+     #inputMethod
+     ## for fcitx5
+     # fcitx5-lua
+     # fcitx5-gtk
+     # fcitx5-mozc
+
      # File manager
      xfce.thunar
 
@@ -161,10 +172,33 @@ in
 
   # Fonts
   fonts.fonts = with pkgs; [
+    # 日本語適当 {{{
+    carlito
+    dejavu_fonts
+    ipafont
+    kochi-substitute
+    source-code-pro
+    ttf_bitstream_vera
+    # }}}
     fira-code
     fira-code-symbols
-     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
+
+  fonts.fontconfig.defaultFonts = {
+    monospace = [
+      "DejaVu Sans Mono"
+      "IPAGothic"
+    ];
+    sansSerif = [
+      "DejaVu Sans"
+      "IPAPGothic"
+    ];
+    serif = [
+      "DejaVu Serif"
+      "IPAPMincho"
+    ];
+  };
 
   # List services that you want to enable:
 
@@ -207,6 +241,9 @@ in
       };
       initExtra = ''
         bindkey -e
+        export XMODIFIERS=@im=fcitx
+        export GTK_IM_MODULE=fcitx
+        export QT_IM_MODULE=fcitx
       '';
       history = {
         size = 10000;
