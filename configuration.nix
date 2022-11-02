@@ -77,13 +77,12 @@ in
 
   # Set Input Method!
   i18n.inputMethod = {
-    # enabled = "fcitx5";
-    # fcitx5.addons = with pkgs; [
-    #   fcitx5-mozc
-    #   fcitx5-chinese-addons
-    # ];
-    enabled = "fcitx";
-    fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
+    enabled = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+    ];
+    # enabled = "fcitx";
+    # fcitx.engines = with pkgs.fcitx-engines; [ mozc ];
   };
 
   # Enable the X11 windowing system.
@@ -174,16 +173,11 @@ in
      gh
      helix
 
-     # For The xmonad
-     # xterm
-     # gmrun
-     # dmenu
-     # wezterm
-
      # For sway
      alacritty # gpu accelerated terminal
      kitty
      sway
+     swaybg
      dbus-sway-environment
      configure-gtk
      wayland
@@ -200,9 +194,18 @@ in
 
      #inputMethod
      ## for fcitx5
-     # fcitx5-lua
+     fcitx5-lua
      # fcitx5-gtk
-     # fcitx5-mozc
+
+     libsForQt5.qt5.qtwayland
+     # libsForQt512.fcitx5-qt
+     # libsForQt514.fcitx5-qt
+     libsForQt5.fcitx5-qt
+     fcitx5-with-addons
+     fcitx5-configtool
+     fcitx5
+     fcitx5-mozc
+
 
      # File manager
      xfce.thunar
@@ -314,10 +317,10 @@ in
       config = rec {
         modifier = "Mod1";
           # Use kitty as default terminal
-          terminal = "kitty";
+          terminal = "foot";
           startup = [
             # Launch Firefox on start
-            {command = "firefox";}
+            {command = "foot";}
           ];
       };
       extraConfig = ''
@@ -343,11 +346,12 @@ in
       };
       initExtra = ''
         bindkey -e
-        export XMODIFIERS=@im=fcitx
-        export GTK_IM_MODULE=fcitx
-        export QT_IM_MODULE=fcitx
+        export XMODIFIERS=@im=fcitx5
+        export GTK_IM_MODULE=fcitx5
+        export QT_IM_MODULE=fcitx5
 
         # Start-up sway automaticaly
+        export WLR_NO_HARDWARE_CURSORS=1 # For visualize cursor(environment spesific)!
         [ "$(tty)" = "/dev/tty1" ] && exec sway
       '';
       history = {
