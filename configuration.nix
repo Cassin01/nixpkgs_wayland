@@ -86,7 +86,7 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = false;
+  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = false;
@@ -96,21 +96,6 @@ in
   services.xserver = {
     layout = "us";
     xkbVariant = "";
-
-    # # The xmonad setting
-    # windowManager = {
-    #   xmonad = {
-    #     enable = true;
-    #     enableContribAndExtras = true;
-    #     extraPackages = haskellPackages: [
-    #       # haskellPackages.dbus
-    #       haskellPackages.List
-    #       haskellPackages.monad-logger
-    #       haskellPackages.xmonad
-    #       haskellPackages.xmonad-contrib
-    #     ];
-    #   };
-    # };
   };
   services.compton.enable = true;
   services.compton.shadow = true;
@@ -167,6 +152,8 @@ in
      neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      wget
      gcc
+     gnumake
+     curl
      deno
      nodejs
      git
@@ -195,15 +182,13 @@ in
      #inputMethod
      ## for fcitx5
      fcitx5-lua
-     # fcitx5-gtk
+     fcitx5-gtk
 
      libsForQt5.qt5.qtwayland
-     # libsForQt512.fcitx5-qt
-     # libsForQt514.fcitx5-qt
      libsForQt5.fcitx5-qt
      fcitx5-with-addons
      fcitx5-configtool
-     fcitx5
+     # fcitx5
      fcitx5-mozc
 
 
@@ -349,6 +334,8 @@ in
         export XMODIFIERS=@im=fcitx5
         export GTK_IM_MODULE=fcitx5
         export QT_IM_MODULE=fcitx5
+        export INPUT_METHOD=fcitx5
+        export XIM_SERVERS=fcitx5
 
         # Start-up sway automaticaly
         export WLR_NO_HARDWARE_CURSORS=1 # For visualize cursor(environment spesific)!
